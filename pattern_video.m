@@ -55,7 +55,7 @@ if isempty(ext)
     filelist = what(fullfile(filepath));
     assert(~isempty(filelist.mat),'input folder should contain Pattern_*.mat file(s)')
     
-    patfile = zeros(1,length(filelist.mat));
+    patfile = []; % will be filled with logicals.. don't initialize with doubles or other format
     for pidx = 1:length(filelist.mat)
         patfile(pidx) = isValidPatternFile(fullfile(filepath,filelist.mat{pidx}));
     end
