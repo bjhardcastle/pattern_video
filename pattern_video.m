@@ -60,7 +60,9 @@ if isempty(ext)
         patfile(pidx) = isValidPatternFile(fullfile(filepath,filelist.mat{pidx}));
     end
     assert(any(patfile),'no pattern files found in folder')
-    patfilenames = filelist.mat(patfile);
+    potentialfiles = (1:length(patfile));
+    patfile = logical(patfile);
+    patfilenames = filelist.mat(potentialfiles(patfile));
     pathnames = cellstr(repmat(filepath,size(patfilenames,1),1));
     
     Pats = fullfile(pathnames,patfilenames);
