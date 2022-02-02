@@ -55,14 +55,12 @@ if isempty(ext)
     filelist = what(fullfile(filepath));
     assert(~isempty(filelist.mat),'input folder should contain Pattern_*.mat file(s)')
     
-    patfile = zeros(1,length(filelist.mat));
+    patfile = []; % will be filled with logicals.. don't initialize with doubles or other format
     for pidx = 1:length(filelist.mat)
         patfile(pidx) = isValidPatternFile(fullfile(filepath,filelist.mat{pidx}));
     end
     assert(any(patfile),'no pattern files found in folder')
-    potentialfiles = (1:length(patfile));
-    patfile = logical(patfile);
-    patfilenames = filelist.mat(potentialfiles(patfile));
+    patfilenames = filelist.mat(patfile);
     pathnames = cellstr(repmat(filepath,size(patfilenames,1),1));
     
     Pats = fullfile(pathnames,patfilenames);
